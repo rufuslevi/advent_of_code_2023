@@ -5,8 +5,12 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
+	"strings"
 )
+
+var numbersNames = map[string]string{"one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": "6", "seven": "7", "eight": "8", "nine": "9"}
 
 func Main() (int, error) {
 	file, err := os.Open("jour1/input.txt")
@@ -19,14 +23,34 @@ func Main() (int, error) {
 
 	line, err := input.ReadBytes('\n')
 	for string(line) != "" {
-		var lineNumbers []int
-		for _, char := range string(line) {
-			num, err := strconv.Atoi(string(char))
-			if err == nil {
-				lineNumbers = append(lineNumbers, num)
+		lineNumbers := make(map[int]string)
+		for name, number := range numbersNames {
+			if strings.Contains(string(line), name) {
+				lineNumbers[strings.Index(string(line), name)] = number
+				lineNumbers[strings.LastIndex(string(line), name)] = number
 			}
 		}
-		lineNumber, err := strconv.Atoi(fmt.Sprintf("%d%d", lineNumbers[0], lineNumbers[len(lineNumbers)-1]))
+
+		for pos, char := range string(line) {
+			num, err := strconv.Atoi(string(char))
+			if err == nil {
+				lineNumbers[pos] = fmt.Sprint(num)
+			}
+		}
+
+		var keys []int
+		for pos := range lineNumbers {
+			keys = append(keys, pos)
+		}
+
+		sort.Ints(keys)
+
+		var values []string
+		for _, pos := range keys {
+			values = append(values, lineNumbers[pos])
+		}
+
+		lineNumber, err := strconv.Atoi(fmt.Sprintf("%s%s", values[0], values[len(values)-1]))
 		if err != nil {
 			return -1, err
 		}
