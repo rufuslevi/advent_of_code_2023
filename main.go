@@ -3,6 +3,7 @@ package main
 import (
 	"advent_of_code_2023/jour1"
 	"advent_of_code_2023/jour2"
+	"advent_of_code_2023/jour3"
 	"advent_of_code_2023/utils"
 	"fmt"
 	"os"
@@ -34,6 +35,10 @@ func main() {
 	case 2:
 		{
 			printAnswer(jour2.Main())
+		}
+	case 3:
+		{
+			printAnswer(jour3.Main())
 		}
 	}
 }
