@@ -2,11 +2,16 @@ package main
 
 import (
 	"advent_of_code_2023/jour1"
+	"advent_of_code_2023/jour2"
 	"advent_of_code_2023/utils"
 	"fmt"
 	"os"
 	"strconv"
 )
+
+func printAnswer(mess string) {
+	fmt.Printf("The answer is :\n%s\n", mess)
+}
 
 func main() {
 	args := os.Args
@@ -20,9 +25,15 @@ func main() {
 
 	switch day {
 	case 1:
-		answer, err := jour1.Main()
-		utils.CheckErr(err, "")
+		{
+			answer, err := jour1.Main()
+			utils.CheckErr(err, "")
 
-		fmt.Printf("The answer is : %d \n", answer)
+			printAnswer(answer)
+		}
+	case 2:
+		{
+			printAnswer(jour2.Main())
+		}
 	}
 }

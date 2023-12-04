@@ -12,10 +12,10 @@ import (
 
 var numbersNames = map[string]string{"one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": "6", "seven": "7", "eight": "8", "nine": "9"}
 
-func Main() (int, error) {
+func Main() (string, error) {
 	file, err := os.Open("jour1/input.txt")
 	if err != nil {
-		return -1, errors.New("Coudln't read input file")
+		return "", errors.New("Coudln't read input file")
 	}
 	input := bufio.NewReader(file)
 
@@ -52,7 +52,7 @@ func Main() (int, error) {
 
 		lineNumber, err := strconv.Atoi(fmt.Sprintf("%s%s", values[0], values[len(values)-1]))
 		if err != nil {
-			return -1, err
+			return "", err
 		}
 
 		sum += lineNumber
@@ -60,5 +60,5 @@ func Main() (int, error) {
 		line, err = input.ReadBytes('\n')
 	}
 
-	return sum, nil
+	return string(sum), nil
 }
