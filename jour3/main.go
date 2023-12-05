@@ -61,7 +61,7 @@ func getNumberLoop(line []rune, lineNumber int, pos int, visited map[int][]int) 
 }
 
 func checkCoord(x int, y int, inputLines []string, visited map[int][]int) int {
-	number := getNumber([]rune(inputLines[y]), y, x, visited)
+	number := getNumberLoop([]rune(inputLines[y]), y, x, visited)
 	newPartNumber, err := strconv.Atoi(number)
 
 	if err != nil {
