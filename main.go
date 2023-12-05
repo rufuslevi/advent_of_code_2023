@@ -4,6 +4,7 @@ import (
 	"advent_of_code_2023/jour1"
 	"advent_of_code_2023/jour2"
 	"advent_of_code_2023/jour3"
+	"advent_of_code_2023/jour4"
 	"advent_of_code_2023/utils"
 	"fmt"
 	"os"
@@ -39,6 +40,10 @@ func main() {
 	case 3:
 		{
 			printAnswer(jour3.Main())
+		}
+	case 4:
+		{
+			printAnswer(jour4.Main())
 		}
 	}
 }
