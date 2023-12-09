@@ -5,6 +5,7 @@ import (
 	"advent_of_code_2023/jour2"
 	"advent_of_code_2023/jour3"
 	"advent_of_code_2023/jour4"
+	"advent_of_code_2023/jour5"
 	"advent_of_code_2023/utils"
 	"fmt"
 	"os"
@@ -66,6 +67,11 @@ func main() {
 		{
 			printAnswer(jour4.Main(), startTime)
 			mesureAnswers(3, jour4.Main)
+		}
+	case 5:
+		{
+			printAnswer(jour5.Main(), startTime)
+			// mesureAnswers(3, jour5.Main)
 		}
 	}
 }
