@@ -89,20 +89,23 @@ func part2(inputLines []string) (string, error) {
 
 	var wg sync.WaitGroup
 
+	totalCompute := 0
+
 	var lowests []int
 	for i := 0; i < len(seedRanges); i += 2 {
 		wg.Add(1)
-		go func(startSeed int, maxRange int, lowests *[]int, categoryMaps [][]categoryMap, wg *sync.WaitGroup) {
+		go func(startSeed int, maxRange int, lowests *[]int, categoryMaps [][]categoryMap, compute *int, wg *sync.WaitGroup) {
 			localLowest := translate(startSeed, categoryMaps)
 			for pos := 0; pos < maxRange; pos++ {
 				newTranslation := translate(startSeed+pos, categoryMaps)
+				*compute++
 				if newTranslation < localLowest {
 					localLowest = newTranslation
 				}
 			}
 			*lowests = append(*lowests, localLowest)
 			defer wg.Done()
-		}(seedRanges[i], seedRanges[i+1], &lowests, categoryMaps, &wg)
+		}(seedRanges[i], seedRanges[i+1], &lowests, categoryMaps, &totalCompute, &wg)
 	}
 
 	wg.Wait()
@@ -113,6 +116,7 @@ func part2(inputLines []string) (string, error) {
 			lowest = seed
 		}
 	}
+	fmt.Printf("Computed %d seeds\n", totalCompute)
 
 	return fmt.Sprint(lowest), nil
 }
